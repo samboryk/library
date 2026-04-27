@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.library.ui.MainController" styleClass="root-pane">
+    <top>
+        <VBox spacing="8" styleClass="header-box">
+            <padding>
+                <Insets top="16" right="16" bottom="12" left="16"/>
+            </padding>
+            <Label text="Бібліотека: прокат книг" styleClass="header-title"/>
+            <HBox spacing="16">
+                <Label fx:id="earnedLabel" text="Зароблено на прокаті: 0" styleClass="metric-label"/>
+                <Label fx:id="depositLabel" text="Активні застави: 0" styleClass="metric-label"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Книги">
+                    <VBox spacing="10" styleClass="content-box">
+                        <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                        <TableView fx:id="booksTable" prefHeight="320">
+                            <columns>
+                                <TableColumn fx:id="titleColumn" text="Назва" prefWidth="220"/>
+                                <TableColumn fx:id="authorColumn" text="Автор" prefWidth="180"/>
+                                <TableColumn fx:id="genreColumn" text="Жанр" prefWidth="120"/>
+                                <TableColumn fx:id="depositColumn" text="Застава" prefWidth="110"/>
+                                <TableColumn fx:id="rentColumn" text="Прокат" prefWidth="110"/>
+                            </columns>
+                        </TableView>
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                            </columnConstraints>
+                            <TextField fx:id="bookTitleField" promptText="Назва" GridPane.columnIndex="0"/>
+                            <TextField fx:id="bookAuthorField" promptText="Автор" GridPane.columnIndex="1"/>
+                            <TextField fx:id="bookGenreField" promptText="Жанр" GridPane.columnIndex="2"/>
+                            <TextField fx:id="bookDepositField" promptText="Застава" GridPane.columnIndex="3"/>
+                            <TextField fx:id="bookRentField" promptText="Прокат" GridPane.columnIndex="4"/>
+                        </GridPane>
+                        <Button text="Додати книгу" onAction="#onAddBook" styleClass="primary-btn"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Читачі">
+                    <VBox spacing="10" styleClass="content-box">
+                        <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                        <TableView fx:id="readersTable" prefHeight="320">
+                            <columns>
+                                <TableColumn fx:id="readerLastNameColumn" text="Прізвище" prefWidth="140"/>
+                                <TableColumn fx:id="readerFirstNameColumn" text="Ім'я" prefWidth="120"/>
+                                <TableColumn fx:id="readerMiddleNameColumn" text="По батькові" prefWidth="140"/>
+                                <TableColumn fx:id="readerAddressColumn" text="Адреса" prefWidth="220"/>
+                                <TableColumn fx:id="readerPhoneColumn" text="Телефон" prefWidth="160"/>
+                            </columns>
+                        </TableView>
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                                <ColumnConstraints percentWidth="20"/>
+                            </columnConstraints>
+                            <TextField fx:id="readerLastNameField" promptText="Прізвище" GridPane.columnIndex="0"/>
+                            <TextField fx:id="readerFirstNameField" promptText="Ім'я" GridPane.columnIndex="1"/>
+                            <TextField fx:id="readerMiddleNameField" promptText="По батькові" GridPane.columnIndex="2"/>
+                            <TextField fx:id="readerAddressField" promptText="Адреса" GridPane.columnIndex="3"/>
+                            <TextField fx:id="readerPhoneField" promptText="Телефон" GridPane.columnIndex="4"/>
+                        </GridPane>
+                        <Button text="Додати читача" onAction="#onAddReader" styleClass="primary-btn"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Прокат">
+                    <VBox spacing="10" styleClass="content-box">
+                        <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+                        <HBox spacing="10">
+                            <ComboBox fx:id="rentBookBox" promptText="Книга" prefWidth="270"/>
+                            <ComboBox fx:id="rentReaderBox" promptText="Читач" prefWidth="220"/>
+                            <DatePicker fx:id="expectedReturnDatePicker" prefWidth="160"/>
+                            <Button text="Видати книгу" onAction="#onIssueBook" styleClass="primary-btn"/>
+                        </HBox>
+
+                        <TableView fx:id="rentalsTable" prefHeight="360">
+                            <columns>
+                                <TableColumn fx:id="rentalBookColumn" text="Книга" prefWidth="220"/>
+                                <TableColumn fx:id="rentalReaderColumn" text="Читач" prefWidth="200"/>
+                                <TableColumn fx:id="rentalIssueDateColumn" text="Дата видачі" prefWidth="120"/>
+                                <TableColumn fx:id="rentalExpectedReturnDateColumn" text="Очікуване повернення" prefWidth="170"/>
+                                <TableColumn fx:id="rentalActualReturnDateColumn" text="Факт повернення" prefWidth="140"/>
+                            </columns>
+                        </TableView>
+
+                        <Button text="Повернути обрану книгу" onAction="#onReturnBook" styleClass="secondary-btn"/>
+                    </VBox>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
